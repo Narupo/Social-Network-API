@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import User from '../models/User';
+import User from '../models/User.js';
+//import Thought from '../models/Thought';
 
-export const getUsers = async (req: Request, res: Response) => {
+export const getUsers = async (_: Request, res: Response) => {
   try {
     const users = await User.find().populate('thoughts').populate('friends');
     res.json(users);

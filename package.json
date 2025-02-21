@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A social network API using Express, MongoDB, and TypeScript",
   "main": "dist/server.js",
+  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "start": "npm run build && node dist/server.js",

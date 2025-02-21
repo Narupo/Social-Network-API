@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getThoughts, createThought } from '../../controllers/thoughtController';
+import { getThoughts, createThought } from '../../controllers/thoughtController.js';
 
 const router = Router();
 
