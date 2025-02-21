@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addReaction, removeReaction } from '../../controllers/reactionController';
+import { addReaction, removeReaction } from '../../controllers/reactionController.js';
 
 const router = Router();
 

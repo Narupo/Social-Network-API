@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import Thought from '../models/Thought';
+import Thought from '../models/Thought.js';
 
 export const addReaction = async (req: Request, res: Response) => {
   try {
     const { thoughtId } = req.params;
-    const reactionData = req.body; // { reactionBody, username }
+    const reactionData = req.body; 
 
     const thought = await Thought.findByIdAndUpdate(
       thoughtId,
@@ -16,9 +16,9 @@ export const addReaction = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Thought not found!' });
     }
 
-    res.json(thought);
+    return res.json(thought);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -36,8 +36,8 @@ export const removeReaction = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Thought not found!' });
     }
 
-    res.json(thought);
+    return res.json(thought);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
