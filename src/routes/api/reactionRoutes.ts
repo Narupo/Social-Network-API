@@ -3,7 +3,10 @@ import { addReaction, removeReaction } from '../../controllers/reactionControlle
 
 const router = Router();
 
-router.route('/:thoughtId/reactions').post(addReaction);
-router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
+router.route('/:thoughtId/reactions')
+.post(addReaction); // POST /api/thoughts/:thoughtId/reactions → Add a reaction to a thought
+
+router.route('/:thoughtId/reactions/:reactionId') // DELETE /api/thoughts/:thoughtId/reactions/:reactionId → Remove a reaction from a thought
+.delete(removeReaction);
 
 export { router as reactionRouter };

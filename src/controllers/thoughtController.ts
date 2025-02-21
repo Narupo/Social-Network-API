@@ -28,3 +28,56 @@ export const createThought = async (req: Request, res: Response) => {
     return res.status(500).json(err);
   }
 };
+
+export const getThoughtById = async (req: Request, res: Response) => {
+  try {
+    const { thoughtId } = req.params;
+
+    const thought = await Thought.findById(thoughtId);
+
+    if (!thought) {
+      return res.status(404).json({ message: 'Thought not found!' });
+    }
+
+    return res.json(thought);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+export const updateThought = async (req: Request, res: Response) => {
+  try {
+    const { thoughtId } = req.params;
+
+    const updatedThought = await Thought.findByIdAndUpdate(
+      thoughtId,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedThought) {
+      return res.status(404).json({ message: 'Thought not found!' });
+    }
+
+    return res.json(updatedThought);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+export const deleteThought = async (req: Request, res: Response) => {
+  try {
+    const { thoughtId } = req.params;
+
+    const deletedThought = await Thought.findByIdAndDelete(thoughtId);
+
+    if (!deletedThought) {
+      return res.status(404).json({ message: 'Thought not found!' });
+    }
+
+    return res.json({ message: 'Thought deleted successfully!' });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+

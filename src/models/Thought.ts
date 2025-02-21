@@ -5,7 +5,7 @@ interface IThought extends Document {
   thoughtText: string;
   createdAt: Date;
   username: string;
-  reactions: typeof ReactionSchema[];
+  reactions: Array<{ reactionBody: string; username: string; createdAt: Date }>;
   reactionCount: number;
 }
 
