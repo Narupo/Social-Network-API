@@ -78,7 +78,7 @@ mongod
 
 ## 🎥 Walkthrough
 
-A walkthrough video demonstrating the API in action will be added here.
+[Walkthrough Video ](https://github.com/user-attachments/assets/0bc4e8d3-6b8f-4456-ac3d-a3da7d0eacdb)
 
 ### 📌 Steps Covered in the Walkthrough:
 1. **Starting the Server**  

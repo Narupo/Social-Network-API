@@ -4,23 +4,28 @@ import Thought from '../models/Thought.js';
 export const addReaction = async (req: Request, res: Response) => {
   try {
     const { thoughtId } = req.params;
-    const reactionData = req.body; 
+    const { reactionBody, username } = req.body;
 
-    const thought = await Thought.findByIdAndUpdate(
+    if (!reactionBody || !username) {
+      return res.status(400).json({ message: "reactionBody and username are required." });
+    }
+
+    const updatedThought = await Thought.findByIdAndUpdate(
       thoughtId,
-      { $push: { reactions: reactionData } }, // Push the reaction into the reactions array
+      { $push: { reactions: { reactionBody, username, createdAt: new Date() } } },
       { new: true, runValidators: true }
     );
 
-    if (!thought) {
+    if (!updatedThought) {
       return res.status(404).json({ message: 'Thought not found!' });
     }
 
-    return res.json(thought);
+    return res.json({ message: "Reaction successfully added!", updatedThought });
   } catch (err) {
     return res.status(500).json(err);
   }
 };
+
 
 export const removeReaction = async (req: Request, res: Response) => {
   try {
@@ -36,7 +41,7 @@ export const removeReaction = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Thought not found!' });
     }
 
-    return res.json(thought);
+    return res.json({message: "Reaction successfully removed!"});
   } catch (err) {
     return res.status(500).json(err);
   }

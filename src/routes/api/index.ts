@@ -7,6 +7,6 @@ const router = Router();
 
 router.use('/users', userRouter);
 router.use('/thoughts', thoughtRouter);
-router.use('/reactions', reactionRouter);
+router.use('/thoughts', reactionRouter);
 
 export default router;

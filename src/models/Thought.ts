@@ -12,7 +12,7 @@ interface IThought extends Document {
 const ThoughtSchema = new Schema<IThought>({
   thoughtText: {
     type: String,
-    required: true,
+    required: [true, 'thoughtText is required!'],
     minlength: 1,
     maxlength: 280,
   },
@@ -22,7 +22,7 @@ const ThoughtSchema = new Schema<IThought>({
   },
   username: {
     type: String,
-    required: true,
+    required: [true, 'username is required!'],
   },
   reactions: [ReactionSchema],
 }, {

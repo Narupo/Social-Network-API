@@ -13,21 +13,32 @@ export const getAllThoughts = async (_: Request, res: Response) => {
 
 export const createThought = async (req: Request, res: Response) => {
   try {
-    const newThought = await Thought.create(req.body);
-    const updatedUser = await User.findByIdAndUpdate(req.body.userId,
+    const { thoughtText, username, userId } = req.body;
+
+    // Validate request body manually
+    if (!thoughtText || !username || !userId) {
+      return res.status(400).json({ message: "thoughtText, username, and userId are required." });
+    }
+
+    const newThought = await Thought.create({ thoughtText, username });
+
+    // Associate Thought with User
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
       { $push: { thoughts: newThought._id } },
       { new: true }
     );
-    // If the user is not found, return an error
+
     if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found!' });
+      return res.status(404).json({ message: "User not found!" });
     }
-    // Return the thought
+
     return res.status(201).json(newThought);
   } catch (err) {
     return res.status(500).json(err);
   }
 };
+
 
 export const getThoughtById = async (req: Request, res: Response) => {
   try {
